@@ -1,5 +1,5 @@
 {
-  "id": "6e029713-e9f0-479b-9005-45f2dffcc318",
+  "id": "51e9a736-2bbb-43c8-a171-49412a05a93a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -18,13 +18,21 @@
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "password": {
           "name": "password",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
+        },
+        "users_loginType": {
+          "name": "users_loginType",
+          "type": "users_loginType",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'email'"
         }
       },
       "indexes": {},
@@ -41,9 +49,18 @@
       }
     }
   },
-  "enums": {},
+  "enums": {
+    "public.users_loginType": {
+      "name": "users_loginType",
+      "schema": "public",
+      "values": [
+        "email",
+        "kakao",
+        "apple"
+      ]
+    }
+  },
   "schemas": {},
-  "sequences": {},
   "_meta": {
     "columns": {},
     "schemas": {},

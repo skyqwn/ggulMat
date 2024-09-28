@@ -1,8 +1,14 @@
-import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, pgEnum } from 'drizzle-orm/pg-core';
+
+export const loginTypeEnum = pgEnum('users_loginType', [
+  'email',
+  'kakao',
+  'apple',
+]);
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
-  name: text('name').notNull(),
   email: text('email').unique().notNull(),
-  passowrd: text('password').notNull(),
+  password: text('password').notNull(),
+  loginType: loginTypeEnum('users_loginType').default('email').notNull(),
 });

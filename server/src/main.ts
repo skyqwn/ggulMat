@@ -9,5 +9,6 @@ async function bootstrap() {
     credentials: true,
   });
   await app.listen(3000);
+  console.log('server listen 3000');
 }
 bootstrap();
