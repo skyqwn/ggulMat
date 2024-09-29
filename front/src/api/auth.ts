@@ -6,6 +6,11 @@ type RequsetUser = {
   password: string;
 };
 
+type ResponseToken = {
+  accessToken: string;
+  refreshToken: string;
+};
+
 const postSignup = async ({email, password}: RequsetUser): Promise<void> => {
   const {data} = await axiosInstance.post('/auth/signup', {
     email,
@@ -14,11 +19,15 @@ const postSignup = async ({email, password}: RequsetUser): Promise<void> => {
   return data;
 };
 
-const postLogin = async ({email, password}: RequsetUser) => {
+const postLogin = async ({
+  email,
+  password,
+}: RequsetUser): Promise<ResponseToken> => {
   const {data} = await axiosInstance.post('auth/signin', {
     email,
     password,
   });
+  return data;
 };
 
 const getProfile = async () => {
@@ -43,3 +52,4 @@ const logout = async () => {
 };
 
 export {postSignup, postLogin, getProfile, getAccessToken, logout};
+export type {RequsetUser, ResponseToken};
