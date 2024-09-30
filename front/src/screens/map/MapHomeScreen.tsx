@@ -1,15 +1,15 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import MapView, {LatLng, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
-import Geolocation from '@react-native-community/geolocation';
 
 import {colors} from '@/constants';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {MapStackParamList} from '@/navigations/stack/MapStackNavigator';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {MainDrawerParamList} from '@/navigations/drawer/MainDrawerNavigator';
+import useUserLocation from '@/hooks/useUserLocation';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,
@@ -17,15 +17,10 @@ type Navigation = CompositeNavigationProp<
 >;
 
 function MapHomeScreen() {
-  const [userLocation, setUserLocation] = useState<LatLng>({
-    latitude: 37.5516,
-    longitude: 126.9898,
-  });
-  const [isUserLocationError, setIsUserLocationError] = useState(false);
-
   const inset = useSafeAreaInsets();
   const navigation = useNavigation<Navigation>();
   const mapRef = useRef<MapView | null>(null);
+  const {userLocation, isUserLocationError} = useUserLocation();
 
   const handlePressUserLocation = () => {
     if (isUserLocationError) {
@@ -39,22 +34,6 @@ function MapHomeScreen() {
       longitudeDelta: 0.0421, // 확대의 정도
     });
   };
-
-  useEffect(() => {
-    Geolocation.getCurrentPosition(
-      info => {
-        const {latitude, longitude} = info.coords;
-        setUserLocation({latitude, longitude});
-        setIsUserLocationError(false);
-      },
-      () => {
-        setIsUserLocationError(true);
-      },
-      {
-        enableHighAccuracy: true, //좀더 정확한 위치를 잡을 수있게함
-      },
-    );
-  }, []);
 
   return (
     <>
