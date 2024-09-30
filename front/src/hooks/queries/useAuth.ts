@@ -97,8 +97,15 @@ function useAuth() {
   });
   const isLogin = getProfileQuery.isSuccess;
   const loginMutation = useLogin();
+  const logoutMutation = useLogout();
 
-  return {signupMutation, loginMutation, isLogin, getProfileQuery, useLogout};
+  return {
+    signupMutation,
+    loginMutation,
+    isLogin,
+    getProfileQuery,
+    logoutMutation,
+  };
 }
 
 export default useAuth;

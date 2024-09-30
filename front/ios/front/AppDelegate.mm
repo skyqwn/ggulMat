@@ -1,11 +1,13 @@
 #import "AppDelegate.h"
 
+#import <GoogleMaps/GoogleMaps.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyBCjbMCrXRh2H2SrErBv6cM_nVLDyU2_EE"];
   self.moduleName = @"front";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.

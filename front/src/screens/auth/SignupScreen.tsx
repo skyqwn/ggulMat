@@ -17,12 +17,9 @@ function SignupScreen() {
 
   const handleSubmit = () => {
     const {email, password} = signup.values;
-    signupMutation.mutate(
-      {email, password},
-      {
-        onSuccess: () => loginMutation.mutate({email, password}),
-      },
-    );
+    signupMutation.mutate(signup.values, {
+      onSuccess: () => loginMutation.mutate({email, password}),
+    });
   };
 
   return (
