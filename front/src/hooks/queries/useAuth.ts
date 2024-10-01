@@ -7,6 +7,7 @@ import {
   logout,
   postLogin,
   postSignup,
+  ResponseProfile,
 } from '@/api/auth';
 import queryClient from '@/api/queryClient';
 import {UseMutationCustomOptions, useQueryCustomOptions} from '@/types';
@@ -67,7 +68,7 @@ function useGetRefreshToken() {
   return {isSuccess, isError};
 }
 
-function useGetProfile(queryOptions?: useQueryCustomOptions) {
+function useGetProfile(queryOptions?: useQueryCustomOptions<ResponseProfile>) {
   return useQuery({
     queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
     queryFn: getProfile,

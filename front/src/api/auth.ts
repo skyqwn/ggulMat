@@ -1,5 +1,6 @@
 import {getEncryptStorage} from '@/utils';
 import axiosInstance from './axios';
+import {Profile} from '@/types/domain';
 
 type RequsetUser = {
   email: string;
@@ -30,7 +31,9 @@ const postLogin = async ({
   return data;
 };
 
-const getProfile = async () => {
+type ResponseProfile = Profile;
+
+const getProfile = async (): Promise<ResponseProfile> => {
   const {data} = await axiosInstance.get('/auth/me');
 
   return data;
@@ -52,4 +55,4 @@ const logout = async () => {
 };
 
 export {postSignup, postLogin, getProfile, getAccessToken, logout};
-export type {RequsetUser, ResponseToken};
+export type {RequsetUser, ResponseToken, ResponseProfile};

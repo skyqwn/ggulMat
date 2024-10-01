@@ -1,6 +1,9 @@
 const colors = {
   GREEN_500: '#27ae60',
   GREEN_400: '#2ecc71',
+  GREEN_300: '#58d68d',
+  GREEN_200: '#82e0aa',
+  GREEN_100: '#abebc6',
   BLUE_500: '#0D8AFF',
   RED_500: '#FF5F5F',
   RED_300: '#FFB4B4',
