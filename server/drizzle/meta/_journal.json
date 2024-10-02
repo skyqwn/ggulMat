@@ -15,6 +15,27 @@
       "when": 1727582274643,
       "tag": "0001_fancy_sabretooth",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727849546799,
+      "tag": "0002_shocking_iceman",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1727849635472,
+      "tag": "0003_kind_blob",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1727850765085,
+      "tag": "0004_oval_drax",
+      "breakpoints": true
     }
   ]
 }
