@@ -1,6 +1,7 @@
 import { relations } from 'drizzle-orm';
 import { pgTable, serial, text, pgEnum, timestamp } from 'drizzle-orm/pg-core';
 import { posts } from './posts.schema';
+import { favorite } from './favorite.schema';
 
 export const loginTypeEnum = pgEnum('users_loginType', [
   'email',
@@ -24,6 +25,7 @@ export const users = pgTable('users', {
 
 export const usersRelations = relations(users, ({ many }) => ({
   posts: many(posts),
+  favorite: many(favorite),
 }));
 
 export type UserSelectType = typeof users.$inferSelect;

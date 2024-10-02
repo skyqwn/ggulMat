@@ -8,6 +8,7 @@ import {
   timestamp,
 } from 'drizzle-orm/pg-core';
 import { users } from './users.schema';
+import { favorite } from './favorite.schema';
 
 export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),
@@ -26,11 +27,12 @@ export const posts = pgTable('posts', {
     .references(() => users.id, { onDelete: 'cascade' }),
 });
 
-export const postsRelations = relations(posts, ({ one }) => ({
+export const postsRelations = relations(posts, ({ one, many }) => ({
   user: one(users, {
     fields: [posts.userId],
     references: [users.id],
   }),
+  favorite: many(favorite),
 }));
 
 export type PostSelectType = typeof posts.$inferSelect;
