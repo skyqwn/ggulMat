@@ -33,8 +33,6 @@ function usePermission(type: PermissionType) {
 
       const checked = await check(permissionOS[type]);
 
-      console.log('checked ', checked);
-
       const showPermissionAlert = () => {
         Alert.alert(
           alerts[`${type}_PERMISSION`].TITLE,
