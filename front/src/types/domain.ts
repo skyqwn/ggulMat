@@ -1,3 +1,5 @@
+type MarkerColor = 'RED' | 'YELLOW' | 'GREEN' | 'BLUE' | 'PURPLE';
+
 interface Profile {
   id: number;
   email: string;
@@ -7,4 +9,4 @@ interface Profile {
   loginType: 'email' | 'kakao' | 'apple';
 }
 
-export type {Profile};
+export type {Profile, MarkerColor};

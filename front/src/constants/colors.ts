@@ -15,6 +15,9 @@ const colors = {
   GRAY_300: '#D8D8D8',
   GRAY_500: '#8E8E8E',
   GRAY_700: '#575757',
+  PINK_400: '#EC87A5',
+  YELLOW_400: '#FFE594',
+  PURPLE_400: '#C4C4E7',
 } as const;
 
 export {colors};
