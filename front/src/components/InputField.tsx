@@ -1,4 +1,4 @@
-import React, {ForwardedRef, forwardRef, useRef} from 'react';
+import React, {ForwardedRef, forwardRef, ReactNode, useRef} from 'react';
 import {
   Dimensions,
   Pressable,
@@ -16,13 +16,14 @@ interface InputFieldProps extends TextInputProps {
   disabled?: boolean;
   error?: string;
   touched?: boolean;
+  icon?: ReactNode;
 }
 
 const deviceHeight = Dimensions.get('screen').height;
 
 const InputField = forwardRef(
   (
-    {disabled = false, error, touched, ...props}: InputFieldProps,
+    {disabled = false, error, touched, icon = null, ...props}: InputFieldProps,
     ref?: ForwardedRef<TextInput>,
   ) => {
     const innerRef = useRef<TextInput | null>(null);
@@ -36,18 +37,22 @@ const InputField = forwardRef(
           style={[
             styles.container,
             disabled && styles.disabled,
+            props.multiline && styles.multiLine,
             touched && Boolean(error) && styles.inputError,
           ]}>
-          <TextInput
-            ref={ref ? mergeRefs(innerRef, ref) : innerRef}
-            editable={!disabled}
-            placeholderTextColor={colors.GRAY_500}
-            style={(styles.input, disabled && styles.disabled)}
-            autoCapitalize="none"
-            spellCheck={false}
-            autoCorrect={false}
-            {...props}
-          />
+          <View style={Boolean(icon) && styles.innerContainer}>
+            {icon}
+            <TextInput
+              ref={ref ? mergeRefs(innerRef, ref) : innerRef}
+              editable={!disabled}
+              placeholderTextColor={colors.GRAY_500}
+              style={(styles.input, disabled && styles.disabled)}
+              autoCapitalize="none"
+              spellCheck={false}
+              autoCorrect={false}
+              {...props}
+            />
+          </View>
           {touched && Boolean(error) && (
             <Text style={styles.error}>{error}</Text>
           )}
@@ -62,6 +67,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.GRAY_200,
     padding: deviceHeight > 700 ? 15 : 10,
+  },
+  innerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  multiLine: {
+    paddingBottom: deviceHeight > 700 ? 55 : 30,
   },
   input: {
     fontSize: 16,

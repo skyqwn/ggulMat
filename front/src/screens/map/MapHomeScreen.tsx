@@ -21,6 +21,7 @@ import useUserLocation from '@/hooks/useUserLocation';
 import usePermission from '@/hooks/usePermission';
 import mapStyle from '@/style/mapStyle';
 import CustomMarker from '@/components/CustomMarker';
+import useGetMarkers from '@/hooks/queries/useGetMarkers';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,
@@ -33,6 +34,7 @@ function MapHomeScreen() {
   const mapRef = useRef<MapView | null>(null);
   const {userLocation, isUserLocationError} = useUserLocation();
   const [selectLocation, setSelectLocation] = useState<LatLng | null>();
+  const {data: markers = []} = useGetMarkers();
   usePermission('LOCATION');
 
   const handleLongPressMapView = ({nativeEvent}: LongPressEvent) => {
@@ -76,15 +78,14 @@ function MapHomeScreen() {
         showsMyLocationButton={false}
         onLongPress={handleLongPressMapView}
         customMapStyle={mapStyle}>
-        <CustomMarker
-          color="BLUE"
-          coordinate={{latitude: 37.5516, longitude: 126.9898}}
-        />
-        <CustomMarker
-          color="RED"
-          score={1}
-          coordinate={{latitude: 37.5616, longitude: 126.9898}}
-        />
+        {markers.map(({id, color, score, ...coordinate}) => (
+          <CustomMarker
+            key={id}
+            color={color}
+            score={score}
+            coordinate={coordinate}
+          />
+        ))}
         {selectLocation && (
           <Callout>
             <Marker coordinate={selectLocation} />

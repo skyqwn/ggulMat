@@ -1,10 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {LatLng} from 'react-native-maps';
 
 import MapHomeScreen from '@/screens/map/MapHomeScreen';
 import {mapNavigations} from '@/constants';
 import AddPostScreen from '@/screens/map/AddPostScreen';
-import {LatLng} from 'react-native-maps';
 
 export type MapStackParamList = {
   [mapNavigations.MAP_HOME]: undefined;

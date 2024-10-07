@@ -1,8 +1,9 @@
 import { relations } from 'drizzle-orm';
 import {
+  doublePrecision,
   integer,
+  pgEnum,
   pgTable,
-  real,
   serial,
   text,
   timestamp,
@@ -10,10 +11,19 @@ import {
 import { users } from './users.schema';
 import { favorite } from './favorite.schema';
 
+export const colorTypeEnum = pgEnum('post_color', [
+  'RED',
+  'BLUE',
+  'GREEN',
+  'PURPLE',
+  'YELLOW',
+]);
+
 export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),
-  latitude: real('latitude').notNull(),
-  longitude: real('longitude').notNull(),
+  color: colorTypeEnum('post_color'),
+  latitude: doublePrecision('latitude').notNull(),
+  longitude: doublePrecision('longitude').notNull(),
   address: text('address').notNull(),
   title: text('title').notNull(),
   description: text('description').notNull(),

@@ -43,6 +43,20 @@
       "when": 1727851968593,
       "tag": "0005_needy_nico_minoru",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1727853533423,
+      "tag": "0006_smart_stingray",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1728273685495,
+      "tag": "0007_salty_ender_wiggin",
+      "breakpoints": true
     }
   ]
 }

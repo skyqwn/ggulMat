@@ -31,4 +31,20 @@ function validateSingup(values: UserInfomation & {passwordConfirm: string}) {
   return signupErrors;
 }
 
-export {validateLogin, validateSingup};
+function validateAddPost(value: {title: string; description: string}) {
+  const errors = {
+    title: '',
+    description: '',
+  };
+
+  if (value.title.trim() === '') {
+    errors.title = '제목을 작성해주세요.';
+  }
+  if (value.description.trim() === '') {
+    errors.description = '설명을 작성해주세요.';
+  }
+
+  return errors;
+}
+
+export {validateLogin, validateSingup, validateAddPost};
