@@ -77,7 +77,12 @@ function MapHomeScreen() {
         followsUserLocation
         showsMyLocationButton={false}
         onLongPress={handleLongPressMapView}
-        customMapStyle={mapStyle}>
+        customMapStyle={mapStyle}
+        region={{
+          ...userLocation,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}>
         {markers.map(({id, color, score, ...coordinate}) => (
           <CustomMarker
             key={id}
