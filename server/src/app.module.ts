@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DrizzleModule } from './drizzle/drizzle.module';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { PostsModule } from './posts/posts.module';
     DrizzleModule,
     AuthModule,
     PostsModule,
+    ImagesModule,
   ],
   providers: [ConfigService],
 })

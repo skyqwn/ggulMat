@@ -57,6 +57,20 @@
       "when": 1728273685495,
       "tag": "0007_salty_ender_wiggin",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1728363759929,
+      "tag": "0008_late_the_fallen",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1728363842236,
+      "tag": "0009_chemical_iron_monger",
+      "breakpoints": true
     }
   ]
 }

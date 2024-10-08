@@ -10,6 +10,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { users } from './users.schema';
 import { favorite } from './favorite.schema';
+import { images } from './images.schema';
 
 export const colorTypeEnum = pgEnum('post_color', [
   'RED',
@@ -43,6 +44,7 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
     references: [users.id],
   }),
   favorite: many(favorite),
+  image: many(images),
 }));
 
 export type PostSelectType = typeof posts.$inferSelect;
