@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -24,6 +25,10 @@ import MarkerSelector from '@/components/MarkerSelector';
 import ScoreInput from '@/components/ScoreInput';
 import DatePickerOption from '@/components/DatePickerOption';
 import useModal from '@/hooks/useModal';
+import ImageInput from '@/components/ImageInput';
+import usePermission from '@/hooks/usePermission';
+import useImagePicker from '@/hooks/useImagePicker';
+import PreviewImageList from '@/components/PreviewImageList';
 
 type AddPostScreenProps = StackScreenProps<
   MapStackParamList,
@@ -47,6 +52,12 @@ function AddPostScreen({route, navigation}: AddPostScreenProps) {
   const [date, setDate] = useState(new Date());
   const [isPicked, setIsPicked] = useState(false);
   const dateOption = useModal();
+  const imagePicker = useImagePicker({
+    initialImages: [],
+  });
+  usePermission('PHOTO');
+
+  console.log(address);
 
   const handleConfirmDate = () => {
     setIsPicked(true);
@@ -72,7 +83,7 @@ function AddPostScreen({route, navigation}: AddPostScreenProps) {
       description: addPost.values.description,
       color: markerColor,
       score,
-      imageUris: [],
+      imageUris: imagePicker.imageUris,
     };
     createPost.mutate(
       {address, ...location, ...body},
@@ -130,6 +141,14 @@ function AddPostScreen({route, navigation}: AddPostScreenProps) {
             onPressMarker={handleSelectMarker}
           />
           <ScoreInput score={score} onChangeScore={handleChangeScore} />
+          <View style={styles.imagesViewer}>
+            <ImageInput onChange={imagePicker.handleChange} />
+            <PreviewImageList
+              imageUris={imagePicker.imageUris}
+              onDelete={imagePicker.delete}
+              onChangeOrder={imagePicker.changeOrder}
+            />
+          </View>
           <DatePickerOption
             date={date}
             isVisible={dateOption.isVisible}
@@ -154,6 +173,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginBottom: 10,
+  },
+  imagesViewer: {
+    flexDirection: 'row',
   },
 });
 

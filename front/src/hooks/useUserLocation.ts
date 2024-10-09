@@ -27,7 +27,6 @@ function useUserLocation() {
       },
     );
   }, [isComeback]);
-
   return {userLocation, isUserLocationError};
 }
 
