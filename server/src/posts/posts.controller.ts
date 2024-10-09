@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { GetUser } from 'src/common/decorator/get-user.decorator';
@@ -17,5 +25,13 @@ export class PostsController {
   @Get('/markers/my')
   getAllMarkers(@GetUser() user: UserSelectType) {
     return this.postsService.getAllMarkers(user);
+  }
+
+  @Get('/:id')
+  getPostById(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: UserSelectType,
+  ) {
+    return this.postsService.getPostById(id, user);
   }
 }
